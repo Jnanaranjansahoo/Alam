@@ -15,9 +15,33 @@ namespace Stock.Data
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Category>().HasData
                 (
-                new Category { Id = 1, Name = "Action" },
-                new Category { Id = 2, Name = "SciFi" },
-                new Category { Id = 3, Name = "History" }
+                new Category 
+                { 
+                    Id = 1,
+                    Name = "Action",
+                    Quantity = 0,
+                    AddValue = 0,
+                    SubValue = 0,
+                    TotalQ = 0
+                },
+                new Category 
+                {
+                    Id = 2,
+                    Name = "Shop",
+                    Quantity = 0,
+                    AddValue = 0,
+                    SubValue = 0,
+                    TotalQ = 0
+                },
+                new Category
+                {
+                    Id = 3,
+                    Name = "Bis",
+                    Quantity = 0,
+                    AddValue = 0,
+                    SubValue = 0,
+                    TotalQ = 0
+                }
                 );
         }
     }
