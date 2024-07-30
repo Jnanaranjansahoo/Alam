@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace Stock.Models
 {
@@ -11,5 +12,7 @@ namespace Stock.Models
         [DisplayName("Category Name")]
         [MaxLength(30)]
         public string? Name { get; set; }
+        [ValidateNever]
+        public double Quantity { get; set; }
     }
 }
