@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Stock.Models;
 using System.Diagnostics;
 
-namespace Stock.Controllers
+namespace StockWeb.Controllers
 {
     public class HomeController : Controller
     {

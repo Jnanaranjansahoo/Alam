@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34916.146
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stock", "Stock\Stock.csproj", "{43C34065-4E79-41BD-AF0B-6986ED0B4DC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockWeb", "Stock\StockWeb.csproj", "{43C34065-4E79-41BD-AF0B-6986ED0B4DC2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stock.DataAcess", "Stock.DataAcess\Stock.DataAcess.csproj", "{9754E118-F538-45DD-B841-2E712E3D612C}"
 EndProject

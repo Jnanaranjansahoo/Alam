@@ -4,7 +4,7 @@
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace Stock.Migrations
+namespace Stock.DataAcess.Migrations
 {
     /// <inheritdoc />
     public partial class addcat : Migration

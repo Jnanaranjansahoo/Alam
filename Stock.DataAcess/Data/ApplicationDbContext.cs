@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Stock.Models;
 
-namespace Stock.Data
+namespace Stock.DataAcess.Data
 {
     public class ApplicationDbContext : DbContext
     {
