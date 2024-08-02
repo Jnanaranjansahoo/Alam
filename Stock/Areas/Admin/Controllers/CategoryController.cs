@@ -3,18 +3,19 @@ using Stock.DataAcess.Data;
 using Stock.DataAcess.Repository.IRepository;
 using Stock.Models;
 
-namespace StockWeb.Controllers
+namespace StockWeb.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController : Controller
     {
-        private readonly ICategoryRepository _catagoryRepo;
-        public CategoryController(ICategoryRepository db)
+        private readonly IUnitOfWork _unitOfWork;
+        public CategoryController(IUnitOfWork unitOfWork)
         {
-            _catagoryRepo = db;
+            _unitOfWork = unitOfWork;
         }
         public IActionResult Index()
         {
-            List<Category> objCategoryList = _catagoryRepo.GetAll().ToList();
+            List<Category> objCategoryList = _unitOfWork.Category.GetAll().ToList();
             //ViewBag.ClientCount = objClientList.Count;
             //ViewBag.Total = objClientList.Count * 120;
             return View(objCategoryList);
@@ -29,8 +30,8 @@ namespace StockWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                _catagoryRepo.Add(obj);
-                _catagoryRepo.Save();
+                _unitOfWork.Category.Add(obj);
+                _unitOfWork.Save();
                 TempData["success"] = "Category Created Successfully";
                 return RedirectToAction("Index");
             }
@@ -42,7 +43,7 @@ namespace StockWeb.Controllers
             {
                 return NotFound();
             }
-            Category? categoryFromDb = _catagoryRepo.Get(u=>u.Id == id);
+            Category? categoryFromDb = _unitOfWork.Category.Get(u => u.Id == id);
 
             if (categoryFromDb == null)
             {
@@ -55,8 +56,8 @@ namespace StockWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                _catagoryRepo.Update(obj);
-                _catagoryRepo.Save();
+                _unitOfWork.Category.Update(obj);
+                _unitOfWork.Save();
                 TempData["success"] = "Category Update Successfully";
                 return RedirectToAction("Index", "Category");
             }
@@ -69,7 +70,7 @@ namespace StockWeb.Controllers
             {
                 return NotFound();
             }
-            Category? categoryFromDb = _catagoryRepo.Get(u => u.Id == id);
+            Category? categoryFromDb = _unitOfWork.Category.Get(u => u.Id == id);
 
             if (categoryFromDb == null)
             {
@@ -81,13 +82,13 @@ namespace StockWeb.Controllers
         public IActionResult DeletePOST(int? id)
         {
 
-            Category? obj = _catagoryRepo.Get(u => u.Id == id);
+            Category? obj = _unitOfWork.Category.Get(u => u.Id == id);
             if (obj == null)
             {
                 return NotFound();
             }
-            _catagoryRepo.Remove(obj);
-            _catagoryRepo.Save();
+            _unitOfWork.Category.Remove(obj);
+            _unitOfWork.Save();
             TempData["success"] = "Category Delete Successfully";
             return RedirectToAction("Index", "Category");
         }
