@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Stock.DataAcess.Data;
 
@@ -10,9 +11,11 @@ using Stock.DataAcess.Data;
 namespace Stock.DataAcess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240802115610_add-foreignkey")]
+    partial class addforeignkey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,10 +80,6 @@ namespace Stock.DataAcess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -100,7 +99,6 @@ namespace Stock.DataAcess.Migrations
                             Id = 1,
                             CategoryId = 1,
                             Description = "it is a good pen",
-                            ImageUrl = "",
                             Name = "Pen",
                             Price = 50m
                         },
@@ -109,7 +107,6 @@ namespace Stock.DataAcess.Migrations
                             Id = 2,
                             CategoryId = 2,
                             Description = "it is a good pen",
-                            ImageUrl = "",
                             Name = "Pensil",
                             Price = 50m
                         },
@@ -118,7 +115,6 @@ namespace Stock.DataAcess.Migrations
                             Id = 3,
                             CategoryId = 1,
                             Description = "it is a good pen",
-                            ImageUrl = "",
                             Name = "Pepshi",
                             Price = 50m
                         },
@@ -127,7 +123,6 @@ namespace Stock.DataAcess.Migrations
                             Id = 4,
                             CategoryId = 2,
                             Description = "it is a good pen",
-                            ImageUrl = "",
                             Name = "banana",
                             Price = 50m
                         },
@@ -136,7 +131,6 @@ namespace Stock.DataAcess.Migrations
                             Id = 5,
                             CategoryId = 3,
                             Description = "it is a good pen",
-                            ImageUrl = "",
                             Name = "mango",
                             Price = 50m
                         },
@@ -145,7 +139,6 @@ namespace Stock.DataAcess.Migrations
                             Id = 6,
                             CategoryId = 3,
                             Description = "it is a good pen",
-                            ImageUrl = "",
                             Name = "applr",
                             Price = 50m
                         });

@@ -27,42 +27,54 @@ namespace Stock.DataAcess.Data
                     Id = 1,
                     Name = "Pen",
                     Description = "it is a good pen",
-                    Price = 50
+                    Price = 50,
+                    CategoryId = 1,
+                    ImageUrl =""
                 },
                 new Product
                 {
                     Id = 2,
                     Name = "Pensil",
                     Description = "it is a good pen",
-                    Price = 50
+                    Price = 50,
+                    CategoryId = 2,
+                    ImageUrl = ""
                 },
                 new Product
                 {
                     Id = 3,
                     Name = "Pepshi",
                     Description = "it is a good pen",
-                    Price = 50
+                    Price = 50,
+                    CategoryId = 1,
+                    ImageUrl = ""
                 },
                 new Product
                 {
                     Id = 4,
                     Name = "banana",
                     Description = "it is a good pen",
-                    Price = 50
+                    Price = 50,
+                    CategoryId = 2,
+                    ImageUrl = ""
                 },
                 new Product
                 {
                     Id = 5,
                     Name = "mango",
                     Description = "it is a good pen",
-                    Price = 50
+                    Price = 50,
+                    CategoryId = 3,
+                    ImageUrl = ""
                 },
                 new Product
                 {
                     Id = 6,
                     Name = "applr",
                     Description = "it is a good pen",
-                    Price = 50
+                    Price = 50,
+                    CategoryId = 3,
+                    ImageUrl = ""
                 }
                 );
         }
