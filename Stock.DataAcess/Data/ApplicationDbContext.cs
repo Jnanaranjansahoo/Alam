@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Stock.Models;
 
 namespace Stock.DataAcess.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -16,64 +17,64 @@ namespace Stock.DataAcess.Data
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Category>().HasData
                 (
-                new Category { Id = 1, Name = "Action" },
-                new Category { Id = 2, Name = "SciFi" },
-                new Category { Id = 3, Name = "History" }
+                new Category { Id = 1001, Name = "Action" },
+                new Category { Id = 1002, Name = "SciFi" },
+                new Category { Id = 1003, Name = "History" }
                 );
             modelBuilder.Entity<Product>().HasData
                 (
                 new Product
                 {
-                    Id = 1,
+                    Id = 101,
                     Name = "Pen",
                     Description = "it is a good pen",
                     Price = 50,
-                    CategoryId = 1,
+                    CategoryId = 1001,
                     ImageUrl =""
                 },
                 new Product
                 {
-                    Id = 2,
+                    Id = 102,
                     Name = "Pensil",
                     Description = "it is a good pen",
                     Price = 50,
-                    CategoryId = 2,
+                    CategoryId = 1002,
                     ImageUrl = ""
                 },
                 new Product
                 {
-                    Id = 3,
+                    Id = 103,
                     Name = "Pepshi",
                     Description = "it is a good pen",
                     Price = 50,
-                    CategoryId = 1,
+                    CategoryId = 1001,
                     ImageUrl = ""
                 },
                 new Product
                 {
-                    Id = 4,
+                    Id = 104,
                     Name = "banana",
                     Description = "it is a good pen",
                     Price = 50,
-                    CategoryId = 2,
+                    CategoryId = 1002,
                     ImageUrl = ""
                 },
                 new Product
                 {
-                    Id = 5,
+                    Id = 105,
                     Name = "mango",
                     Description = "it is a good pen",
                     Price = 50,
-                    CategoryId = 3,
+                    CategoryId = 1003,
                     ImageUrl = ""
                 },
                 new Product
                 {
-                    Id = 6,
+                    Id = 106,
                     Name = "applr",
                     Description = "it is a good pen",
                     Price = 50,
-                    CategoryId = 3,
+                    CategoryId = 1003,
                     ImageUrl = ""
                 }
                 );

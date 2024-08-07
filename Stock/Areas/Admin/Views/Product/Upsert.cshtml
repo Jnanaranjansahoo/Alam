@@ -40,7 +40,7 @@
                             <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
                         </div>
                         <div class="form-floating py-2 col-12">
-                            <input type="file" name="file" class="form-control border-0 shadow" />
+                            <input type="file" name="file" class="form-control border-0 shadow" onchange="readURL(this);" />
                             <label asp-for="Product.ImageUrl" class="ms-2"></label>
                             <span asp-validation-for="Product.ImageUrl" class="text-danger"></span>
                         </div>
@@ -66,7 +66,7 @@
                     </div>
                 </div>
                 <div class="col-2">
-                    <img src="@Model.Product.ImageUrl" width="100%"
+                    <img id="blah" src="@Model.Product.ImageUrl" width="100%"
                          style="border-radius:5px; border:1px solid #bbb9b9" />
                 </div>
             </div>
@@ -78,6 +78,20 @@
 
 
 @section Scripts {
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
     @{
         <partial name="_ValidationScriptsPartial" />
     }

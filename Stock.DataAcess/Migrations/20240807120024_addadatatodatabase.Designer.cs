@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Stock.DataAcess.Data;
 
@@ -11,9 +12,11 @@ using Stock.DataAcess.Data;
 namespace Stock.DataAcess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240807120024_addadatatodatabase")]
+    partial class addadatatodatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -296,7 +299,7 @@ namespace Stock.DataAcess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 101,
+                            Id = 1,
                             CategoryId = 1001,
                             Description = "it is a good pen",
                             ImageUrl = "",
@@ -305,7 +308,7 @@ namespace Stock.DataAcess.Migrations
                         },
                         new
                         {
-                            Id = 102,
+                            Id = 2,
                             CategoryId = 1002,
                             Description = "it is a good pen",
                             ImageUrl = "",
@@ -314,7 +317,7 @@ namespace Stock.DataAcess.Migrations
                         },
                         new
                         {
-                            Id = 103,
+                            Id = 3,
                             CategoryId = 1001,
                             Description = "it is a good pen",
                             ImageUrl = "",
@@ -323,7 +326,7 @@ namespace Stock.DataAcess.Migrations
                         },
                         new
                         {
-                            Id = 104,
+                            Id = 4,
                             CategoryId = 1002,
                             Description = "it is a good pen",
                             ImageUrl = "",
@@ -332,7 +335,7 @@ namespace Stock.DataAcess.Migrations
                         },
                         new
                         {
-                            Id = 105,
+                            Id = 5,
                             CategoryId = 1003,
                             Description = "it is a good pen",
                             ImageUrl = "",
@@ -341,7 +344,7 @@ namespace Stock.DataAcess.Migrations
                         },
                         new
                         {
-                            Id = 106,
+                            Id = 6,
                             CategoryId = 1003,
                             Description = "it is a good pen",
                             ImageUrl = "",
