@@ -8,26 +8,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Stock.DataAcess.Migrations
 {
     /// <inheritdoc />
-    public partial class addadatatodatabase : Migration
+    public partial class initialization : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DeleteData(
-                table: "Categories",
-                keyColumn: "Id",
-                keyValue: 1);
-
-            migrationBuilder.DeleteData(
-                table: "Categories",
-                keyColumn: "Id",
-                keyValue: 2);
-
-            migrationBuilder.DeleteData(
-                table: "Categories",
-                keyColumn: "Id",
-                keyValue: 3);
-
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -65,6 +50,20 @@ namespace Stock.DataAcess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Categories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Quantity = table.Column<double>(type: "float", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -113,8 +112,8 @@ namespace Stock.DataAcess.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    ProviderKey = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
@@ -158,8 +157,8 @@ namespace Stock.DataAcess.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -169,6 +168,29 @@ namespace Stock.DataAcess.Migrations
                         name: "FK_AspNetUserTokens_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Products_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -183,47 +205,18 @@ namespace Stock.DataAcess.Migrations
                     { 1003, "History", 0.0 }
                 });
 
-            migrationBuilder.UpdateData(
+            migrationBuilder.InsertData(
                 table: "Products",
-                keyColumn: "Id",
-                keyValue: 1,
-                column: "CategoryId",
-                value: 1001);
-
-            migrationBuilder.UpdateData(
-                table: "Products",
-                keyColumn: "Id",
-                keyValue: 2,
-                column: "CategoryId",
-                value: 1002);
-
-            migrationBuilder.UpdateData(
-                table: "Products",
-                keyColumn: "Id",
-                keyValue: 3,
-                column: "CategoryId",
-                value: 1001);
-
-            migrationBuilder.UpdateData(
-                table: "Products",
-                keyColumn: "Id",
-                keyValue: 4,
-                column: "CategoryId",
-                value: 1002);
-
-            migrationBuilder.UpdateData(
-                table: "Products",
-                keyColumn: "Id",
-                keyValue: 5,
-                column: "CategoryId",
-                value: 1003);
-
-            migrationBuilder.UpdateData(
-                table: "Products",
-                keyColumn: "Id",
-                keyValue: 6,
-                column: "CategoryId",
-                value: 1003);
+                columns: new[] { "Id", "CategoryId", "Description", "ImageUrl", "Name", "Price" },
+                values: new object[,]
+                {
+                    { 101, 1001, "it is a good pen", "", "Pen", 50m },
+                    { 102, 1002, "it is a good pen", "", "Pensil", 50m },
+                    { 103, 1001, "it is a good pen", "", "Pepshi", 50m },
+                    { 104, 1002, "it is a good pen", "", "banana", 50m },
+                    { 105, 1003, "it is a good pen", "", "mango", 50m },
+                    { 106, 1003, "it is a good pen", "", "applr", 50m }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -263,6 +256,11 @@ namespace Stock.DataAcess.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_CategoryId",
+                table: "Products",
+                column: "CategoryId");
         }
 
         /// <inheritdoc />
@@ -284,77 +282,16 @@ namespace Stock.DataAcess.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Products");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
-            migrationBuilder.DeleteData(
-                table: "Categories",
-                keyColumn: "Id",
-                keyValue: 1001);
-
-            migrationBuilder.DeleteData(
-                table: "Categories",
-                keyColumn: "Id",
-                keyValue: 1002);
-
-            migrationBuilder.DeleteData(
-                table: "Categories",
-                keyColumn: "Id",
-                keyValue: 1003);
-
-            migrationBuilder.InsertData(
-                table: "Categories",
-                columns: new[] { "Id", "Name", "Quantity" },
-                values: new object[,]
-                {
-                    { 1, "Action", 0.0 },
-                    { 2, "SciFi", 0.0 },
-                    { 3, "History", 0.0 }
-                });
-
-            migrationBuilder.UpdateData(
-                table: "Products",
-                keyColumn: "Id",
-                keyValue: 1,
-                column: "CategoryId",
-                value: 1);
-
-            migrationBuilder.UpdateData(
-                table: "Products",
-                keyColumn: "Id",
-                keyValue: 2,
-                column: "CategoryId",
-                value: 2);
-
-            migrationBuilder.UpdateData(
-                table: "Products",
-                keyColumn: "Id",
-                keyValue: 3,
-                column: "CategoryId",
-                value: 1);
-
-            migrationBuilder.UpdateData(
-                table: "Products",
-                keyColumn: "Id",
-                keyValue: 4,
-                column: "CategoryId",
-                value: 2);
-
-            migrationBuilder.UpdateData(
-                table: "Products",
-                keyColumn: "Id",
-                keyValue: 5,
-                column: "CategoryId",
-                value: 3);
-
-            migrationBuilder.UpdateData(
-                table: "Products",
-                keyColumn: "Id",
-                keyValue: 6,
-                column: "CategoryId",
-                value: 3);
+            migrationBuilder.DropTable(
+                name: "Categories");
         }
     }
 }
