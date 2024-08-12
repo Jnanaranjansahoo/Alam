@@ -16,7 +16,7 @@ namespace StockWeb.Areas.Admin.Controllers
         public IActionResult Index()
         {
             List<Category> objCategoryList = _unitOfWork.Category.GetAll().ToList();
-            //ViewBag.ClientCount = objClientList.Count;
+            //ViewBag.ProductCount = objCategoryList.Count;
             //ViewBag.Total = objClientList.Count * 120;
             return View(objCategoryList);
         }
